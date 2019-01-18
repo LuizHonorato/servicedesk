@@ -18,6 +18,8 @@ module.exports = app => {
         const isMatch = bcrypt.compareSync(req.body.password, user.password)
         if (!isMatch) return res.status(401).send('E-mail/Senha inválidos!')
 
+        //const now = Math.floor(Date.now() / 1000)
+
         const token = jwt.sign(user, authSecret, {
             expiresIn: "1 day"
         })
@@ -38,12 +40,12 @@ module.exports = app => {
     }
 
     const validateToken = (req, res, next) => {
-        const token = req.body.token || null
-        console.log(token)
+        const token = req.body.token || ''
         
         jwt.verify(token, authSecret, function (err, decoded) {
             return res.status(200).send({valid: !err})
         })
+        
     }
 
     return {signin, validateToken}
