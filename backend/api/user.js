@@ -15,7 +15,7 @@ module.exports = app => {
         try {
             existsOrError(user.first_name, 'Nome não informado.')
             existsOrError(user.last_name, 'Sobrenome não informado.')
-            existsOrError(user.department, 'Departamento não informado.')
+            existsOrError(user.department_id, 'Departamento não informado.')
             existsOrError(user.email, 'E-mail não informado.')
             existsOrError(user.password, 'Senha não informada.')
             existsOrError(user.confirm_password, 'Confirmação de senha não informada.')
@@ -35,7 +35,8 @@ module.exports = app => {
 
         if(user.id) {
             app.db('users')
-                .insert(user)
+                .update(user)
+                .where({id: user.id})
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {

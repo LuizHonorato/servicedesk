@@ -37,20 +37,13 @@ module.exports = app => {
         })
     }
 
-    const validateToken = async (req, res) => {
-        const userData = req.body || null
-        try {
-            if(userData) {
-                const token = jwt.decode(userData.token, authSecret)
-                if(new Date(token.exp * 1000) > new Date()){
-                    return res.status(200).send(true)
-                }
-            }
-        } catch(e) {
-            //tratar token vencido
-        }
+    const validateToken = (req, res, next) => {
+        const token = req.body.token || null
+        console.log(token)
         
-        res.send(false)
+        jwt.verify(token, authSecret, function (err, decoded) {
+            return res.status(200).send({valid: !err})
+        })
     }
 
     return {signin, validateToken}

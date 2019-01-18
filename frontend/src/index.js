@@ -5,8 +5,8 @@ import {Provider} from 'react-redux'
 import promise from 'redux-promise'
 import multi from 'redux-multi'
 import thunk from 'redux-thunk'
-import App from './main/App';
 
+import Routes from './main/routes'
 import reducers from './main/reducers'
 
 import * as serviceWorker from './serviceWorker';
@@ -18,7 +18,7 @@ const store = applyMiddleware(multi, thunk, promise)(createStore)(reducers, devT
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Routes />
     </Provider>
     , document.getElementById('root'));
 
