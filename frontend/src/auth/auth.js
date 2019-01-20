@@ -1,58 +1,36 @@
 import React from 'react';
-import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core';
 
-import {signin} from './authActions'
+import Banner from '../common/template/banner'
+import LoginForm from './loginForm'
 
 const styles = theme => ({
     root: {
-      flexGrow: 1
+        flexGrow: 1
     },
-    paper: {
-      padding: theme.spacing.unit * 2,
-      textAlign: 'center',
-      color: theme.palette.text.secondary
+    banner: {
+        marginTop: theme.spacing.unit * 8
     },
-    button: {
-        margin: theme.spacing.unit,
-      }
+    services: {
+        marginTop: theme.spacing.unit * 3
+    }
 })
 
-const Auth = ({classes, dispatch}) => {
-    
-    let email
-    let password
+const Auth = ({classes}) => {
 
     return (
-        <form className={classes.root}
-            onSubmit={e => {
-                e.preventDefault()
-                if(!email.value.trim() || !password.value.trim()) {
-                    return
-                }
-                dispatch(signin(email.value, password.value))
-                email.value = ''
-                password.value = ''
-            }}>
-            <TextField 
-                inputRef={node => email = node}
-                id="email"
-                label="E-mail"
-                margin="normal"/>
-
-            <TextField 
-                inputRef={node => password = node}
-                id="password"
-                label="Senha"
-                margin="normal"/>
-
-            <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                Entrar
-            </Button>
-        </form>
+        <div className={classes.root}>
+          <Grid container spacing={16}>
+              <Grid item xs={8}>
+                  <Banner />
+              </Grid>
+              <Grid item xs={4}> 
+                  <LoginForm />
+              </Grid>
+            </Grid>
+        </div>
     )
 
 }
@@ -61,4 +39,4 @@ Auth.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(connect()(Auth));
+export default withStyles(styles)(Auth);
