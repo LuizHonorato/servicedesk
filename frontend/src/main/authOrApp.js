@@ -30,4 +30,3 @@ class AuthOrApp extends Component {
 const mapStateToProps = state => ({auth: state.auth})
 const mapDispatchToProps = dispatch => bindActionCreators({validateToken}, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(AuthOrApp)
-

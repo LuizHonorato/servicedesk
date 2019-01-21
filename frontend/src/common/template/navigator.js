@@ -14,10 +14,11 @@ import Typography from '@material-ui/core/Typography';
 // ICONS
 import Queue from '@material-ui/icons/Queue'
 import LibraryBooks from '@material-ui/icons/LibraryBooks'
+import Email from '@material-ui/icons/Email'
 import Home from '@material-ui/icons/Home';
 import People from '@material-ui/icons/People';
 import Public from '@material-ui/icons/Public';
-import Email from '@material-ui/icons/Email'
+
 
 // STYLES
 import withNavigatorStyles from './Navigator.style';
@@ -43,12 +44,12 @@ const categories = [
 const Navigator = ({ classes }) => (
   <Drawer
     variant="permanent"
-    classes={{ paper: cx(classes.drawer) }}
+    classes={{ paper: cx('navigator', classes.drawer) }}
   >
     <List className={classes.list}>
       <ListItem className={classes.header}>
         <ListItemIcon className={classes.itemIcon}>
-            <img src={require('../images/sicoob_logo.png')} alt="Logo" />
+          <img src={require('../images/sicoob_logo.png')} alt="Logo" />
         </ListItemIcon>
         <Typography component="h1" variant="h5" className={classes.titleMenu}>
                   Service Desk
@@ -59,7 +60,7 @@ const Navigator = ({ classes }) => (
           <Home />
         </ListItemIcon>
         <ListItemText classes={{ primary: classes.itemText }}>
-          Página inicial
+          Página Inicial
         </ListItemText>
       </ListItem>
       {categories.map(({ id, children }) => (

@@ -31,11 +31,6 @@ export default withStyles(theme => ({
       color: activeColor,
     },
   },
-  titleMenu: {
-    fontSize: 24,
-    fontFamily: theme.typography.fontFamily,
-    color: theme.palette.common.white,
-  },
   header: {
     background: '#262f3d',
     boxShadow: `inset 0 -1px ${dividerColor}`,
@@ -45,17 +40,6 @@ export default withStyles(theme => ({
   },
   firebaseHeader: {
     marginLeft: theme.spacing.unit,
-  },
-  firebaseLogo: {
-    height: 28,
-    width: 28
-  },
-  firebaseLabel: {
-    height: 18,
-    marginLeft: theme.spacing.unit
-  },
-  navigator: {
-    position: 'relative',
   },
   smallIcon: {
     paddingTop: theme.spacing.unit,

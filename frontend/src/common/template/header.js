@@ -1,20 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 
 // COMPONENTS
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Help from '@material-ui/icons/Help';
+
 
 import withStyles from '@material-ui/core/styles/withStyles';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
 // ICONS
-import Notifications from '@material-ui/icons/Notifications';
+import Exit from '@material-ui/icons/ExitToApp';
+
+import {logout} from '../../auth/authActions'
 
 const styles = () => ({
   grow: {
@@ -22,89 +25,66 @@ const styles = () => ({
   },
 });
 
-const Header = ({ classes }) => (
-  <React.Fragment>
-    <AppBar
-      className={'primary-app-bar'}
-      color={'default'}
-      position={'sticky'}
-      elevation={2}
-    >
-      <Toolbar>
-        <Grid container justify={'center'} alignItems={'center'} spacing={16}>
-          <Grid item>
-            <Typography>You are viewing the Firebase demo project.</Typography>
-            <Typography color={'primary'} component={'a'} href={'#'}>
-              Learn more
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Button color={'primary'} variant={'contained'}>
-              Create a project
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button>Exit demo</Button>
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-    <AppBar
-      className={'secondary-app-bar'}
-      color={'primary'}
-      position={'sticky'}
-      elevation={0}
-    >
-      <Toolbar>
-        <Grid container spacing={16} justify={'flex-end'} alignItems={'center'}>
-          <Grid item>
-            <Typography component={'a'} href={'#'} color={'primary'}>
-              Go to docs
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Notifications color={'inherit'} />
-          </Grid>
-          <Grid item>
-            <Avatar
-              src={
-                'https://lh3.googleusercontent.com/-mYNSKSzYGjw/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbABtwn15AVhtNsFWiPi-8vW8A7Lig/s64-c-mo/photo.jpg'
-              }
-            />
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-    <AppBar
-      className={'third-app-bar'}
-      color={'primary'}
-      position={'static'}
-      elevation={0}
-    >
-      <Toolbar>
-        <Typography color={'inherit'} variant={'h5'} className={classes.grow}>
-          Authentication
-        </Typography>
-        <Button variant={'outlined'} color={'inherit'}>
-          Web setup
-        </Button>
-        <Help />
-      </Toolbar>
-    </AppBar>
-    <AppBar
-      className={'fourth-app-bar'}
-      color={'primary'}
-      position={'static'}
-      elevation={0}
-    >
-      <Tabs value={0} textColor={'inherit'}>
-        <Tab textColor={'inherit'} label="User" />
-        <Tab textColor={'inherit'} label="Sign-in method" />
-        <Tab textColor={'inherit'} label="Templates" />
-        <Tab textColor={'inherit'} label="Usage" />
-      </Tabs>
-    </AppBar>
-  </React.Fragment>
-);
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#01ad9d'
+    },
+    secondary: {
+      main: '#fff'
+    }
+  },
+  typography: {
+    useNextVariants: true
+  }
+})
 
-export default withStyles(styles)(Header);
+class Header extends Component {
+
+  render(){
+    const {classes} = this.props
+
+    return (
+      <React.Fragment>
+          <MuiThemeProvider theme={theme}>
+            <AppBar
+                className={'secondary-app-bar'}
+                color={'primary'}
+                position={'sticky'}
+                elevation={0}>
+                <Toolbar>
+                  <Grid container spacing={16} justify={'flex-end'} alignItems={'center'}>
+                    <Grid item>
+                      <Exit color={'secondary'} onClick={this.props.logout} />
+                    </Grid>
+                  </Grid>
+                </Toolbar>
+              </AppBar>
+              <AppBar
+              className={'third-app-bar'}
+              color={'primary'}
+              position={'static'}
+              elevation={0}>
+              <Toolbar>
+                <Typography color={'secondary'} variant={'h5'} className={classes.grow}>
+                  Chamados
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <AppBar
+              className={'fourth-app-bar'}
+              color={'primary'}
+              position={'static'}
+              elevation={0}>
+              <Tabs value={0} textColor={'secondary'}>
+                <Tab textColor={'secondary'} label="Novo" />
+              </Tabs>
+            </AppBar>
+          </MuiThemeProvider>
+    </React.Fragment>
+    )
+  }
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({logout}, dispatch)
+export default withStyles(styles)(connect(null, mapDispatchToProps)(Header));

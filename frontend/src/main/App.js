@@ -1,40 +1,57 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Navigator from '../common/template/navigator'
-import Header from '../common/template/header'
 
-const styles = theme => ({
-  App: {
+import styled, { cx } from 'react-emotion';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+
+import Header from '../common/template/Header';
+import Navigator from '../common/template/Navigator';
+import Content from '../common/template/Content';
+
+const App = styled(({ className }) => (
+  <div className={cx('App', className)}>
+    <CssBaseline />
+    <Navigator />
+    <div className={'app-content'}>
+      <Header />
+      <main className={'main-content'}>
+        <Content />
+      </main>
+    </div>
+  </div>
+))({
+  '&.App': {
     display: 'flex',
     minHeight: '100vh',
   },
-  appContent: {
+  '.firebase-logo': {
+    maxHeight: 28,
+  },
+  '.firebase-label': {
+    height: 18,
+  },
+  '.navigator': {
+    position: 'relative',
+  },
+  '.app-content': {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
     main: {
-      flex: 1
-    }
-  }
-})
+      flex: 1,
+    },
+    '.primary-app-bar': {
+      zIndex: 1150,
+    },
+    '.secondary-app-bar': {
+      top: 0,
+      zIndex: 1140,
+    },
+    '.main-content': {
+      paddingTop: 48,
+    },
+  },
+});
 
-const App = ({classes}) => {
-
-  return (
-    <div className={classes.App}>
-      <CssBaseline />
-          <Navigator />
-      <div className={classes.appContent}>
-        <Header />
-      </div>
-    </div>
-  )
-}
-
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(App);
+export default App;

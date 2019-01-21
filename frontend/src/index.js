@@ -9,20 +9,39 @@ import thunk from 'redux-thunk'
 import Routes from './main/routes'
 import reducers from './main/reducers'
 
-import * as serviceWorker from './serviceWorker';
+// THEME
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import muiTheme from './theme/muiTheme';
+
+// App
+import App from './main/App';
+
+// CSS
+// import 'sanitize.css/sanitize.css';
+// import 'index.css';
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
     && window.window.__REDUX_DEVTOOLS_EXTENSION__()
 
 const store = applyMiddleware(multi, thunk, promise)(createStore)(reducers, devTools)
 
-ReactDOM.render(
+const render = Component => {
+  ReactDOM.render(
     <Provider store={store}>
-        <Routes />
-    </Provider>
-    , document.getElementById('root'));
+        <MuiThemeProvider theme={muiTheme}>
+          <Routes />
+        </MuiThemeProvider>
+    </Provider>,
+    document.getElementById('root')
+  );
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Render once
+render(App);
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./main/App', () => {
+    render(App);
+  });
+}
