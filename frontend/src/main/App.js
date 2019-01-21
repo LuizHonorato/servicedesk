@@ -1,28 +1,40 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import {withStyles} from '@material-ui/core/styles'
-
+import React from 'react';
+import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Navigator from '../common/template/navigator'
-import {logout} from '../auth/authActions'
+import Header from '../common/template/header'
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
+  App: {
+    display: 'flex',
+    minHeight: '100vh',
+  },
+  appContent: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    main: {
+      flex: 1
+    }
   }
 })
 
-class App extends Component {
+const App = ({classes}) => {
 
-    render() {
-      return (
-        <div>
+  return (
+    <div className={classes.App}>
+      <CssBaseline />
           <Navigator />
-        </div>
-      )
-    }
-
+      <div className={classes.appContent}>
+        <Header />
+      </div>
+    </div>
+  )
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({logout}, dispatch)
-export default withStyles(styles)(connect(null, mapDispatchToProps)(App));
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(App);

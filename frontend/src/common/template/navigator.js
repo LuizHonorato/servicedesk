@@ -9,12 +9,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography';
 
 // ICONS
-import Tickets from '@material-ui/icons/Receipt'
+import Queue from '@material-ui/icons/Queue'
+import LibraryBooks from '@material-ui/icons/LibraryBooks'
 import Home from '@material-ui/icons/Home';
 import People from '@material-ui/icons/People';
 import Public from '@material-ui/icons/Public';
+import Email from '@material-ui/icons/Email'
 
 // STYLES
 import withNavigatorStyles from './Navigator.style';
@@ -23,14 +26,16 @@ const categories = [
   {
     id: 'Serviços',
     children: [
-      { id: 'Chamados', icon: <Tickets /> },
+      { id: 'Novo', icon: <Queue /> },
+      { id: 'Meus chamados', icon: <LibraryBooks /> },
       { id: 'Minha conta', icon: <People />, active: true }
     ],
   },
   {
     id: 'Ajuda',
     children: [
-      { id: 'Localização', icon: <Public /> }
+      { id: 'Localização', icon: <Public /> },
+      { id: 'Contato', icon: <Email /> }
     ],
   },
 ];
@@ -41,11 +46,13 @@ const Navigator = ({ classes }) => (
     classes={{ paper: cx(classes.drawer) }}
   >
     <List className={classes.list}>
-      <ListItem className={cx(classes.titleMenu, classes.header)}>
+      <ListItem className={classes.header}>
         <ListItemIcon className={classes.itemIcon}>
-        <img src={require('../images/sicoob_logo.png')} alt="Logo" />
+            <img src={require('../images/sicoob_logo.png')} alt="Logo" />
         </ListItemIcon>
-        Service Desk
+        <Typography component="h1" variant="h5" className={classes.titleMenu}>
+                  Service Desk
+        </Typography>
       </ListItem>
       <ListItem className={cx(classes.header, classes.unPaddedRight)}>
         <ListItemIcon className={classes.itemIcon}>
