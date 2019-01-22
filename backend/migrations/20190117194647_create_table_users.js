@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
             .inTable('departments').notNull()
         table.string('email').notNull().unique()
         table.string('password').notNull()
-        table.enu('user_type', ['USUÁRIO', 'ATENDENTE', 'ADMINISTRADOR']).defaultTo('USUÁRIO')
+        table.enu('user_type', ['CONSUMIDOR', 'OPERADOR', 'ADMINISTRADOR']).defaultTo('CONSUMIDOR')
         table.date('deleted_at')
     })
 };
