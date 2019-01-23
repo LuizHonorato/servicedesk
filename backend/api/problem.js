@@ -12,7 +12,7 @@ module.exports = app => {
             const problemFromDB = await app.db('problems')
                 .where({name: problem.name}).first()
                 if(!problem.id) {
-                    notExistsOrError(problemFromDB, 'Problema ja cadastrado.')
+                    notExistsOrError(problemFromDB, 'Problema já cadastrado.')
                 }
         } catch(msg) {
             return res.status(400).send(msg)

@@ -20,6 +20,17 @@ module.exports = app => {
         .get(app.api.cooperative.getById)
         .delete(admin(app.api.cooperative.remove))
 
+    app.route('/departments')
+        .all(app.config.passport.authenticate())
+        .post(admin(app.api.department.save))
+        .get(app.api.department.get)
+
+    app.route('/departments/:id')
+        .all(app.config.passport.authenticate())
+        .put(admin(app.api.department.save))
+        .get(app.api.department.getById)
+        .delete(admin(app.api.department.remove))
+
     app.route('/types')
         .all(app.config.passport.authenticate())
         .post(admin(app.api.type.save))
@@ -41,6 +52,39 @@ module.exports = app => {
         .put(admin(app.api.problem.save))
         .get(app.api.problem.getById)
         .delete(admin(app.api.problem.remove))
+
+    app.route('/subjects')
+        .all(app.config.passport.authenticate())
+        .post(admin(app.api.subject.save))
+        .get(app.api.subject.get)
+
+    app.route('/subjects/:id')
+        .all(app.config.passport.authenticate())
+        .put(admin(app.api.subject.save))
+        .get(app.api.subject.getById)
+        .delete(admin(app.api.subject.remove))
+
+    app.route('/classes')
+        .all(app.config.passport.authenticate())
+        .post(admin(app.api.class.save))
+        .get(app.api.class.get)
+
+    app.route('/classes/:id')
+        .all(app.config.passport.authenticate())
+        .put(admin(app.api.class.save))
+        .get(app.api.class.getById)
+        .delete(admin(app.api.class.remove))
+
+    app.route('/items')
+        .all(app.config.passport.authenticate())
+        .post(admin(app.api.item.save))
+        .get(app.api.item.get)
+
+    app.route('/items/:id')
+        .all(app.config.passport.authenticate())
+        .put(admin(app.api.item.save))
+        .get(app.api.item.getById)
+        .delete(admin(app.api.item.remove))
     
     app.route('/users')
         .all(app.config.passport.authenticate())
