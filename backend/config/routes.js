@@ -98,6 +98,20 @@ module.exports = app => {
         .get(app.api.item.getById)
         .delete(admin(app.api.item.remove))
 
+    app.route('/tickets')
+        .all(app.config.passport.authenticate())
+        .post(app.api.ticket.save)
+        .get(app.api.ticket.get)
+
+    app.route('/tickets/:id')
+        .all(app.config.passport.authenticate())
+        .put(app.api.ticket.save)
+        .get(app.api.ticket.getById)
+        .delete(app.api.ticket.remove)
+
+    app.route('/interactions')
+        .all(app.config.passport.authenticate())
+        .post(app.api.interaction.save)
     
     app.route('/users')
         .all(app.config.passport.authenticate())

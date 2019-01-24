@@ -11,7 +11,7 @@ module.exports = app => {
 
             const itemFromDB = await app.db('items')
                 .where({name: item.name}).first()
-                if(item.id) {
+                if(!item.id) {
                     notExistsOrError(itemFromDB, 'Item já cadastrado.')
                 }
         } catch(msg) {

@@ -2,10 +2,11 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('tickets', table => {
         table.increments('id').primary()
-        table.integer('number').notNull()
+        table.integer('number').notNull().unique()
         table.integer('status_id').references('id').inTable('status').notNull()
         table.integer('type_id').references('id').inTable('types').notNull()
         table.integer('problem_id').references('id').inTable('problems').notNull()
+        table.string('title', 60).notNull()
         table.string('description').notNull()
         table.integer('subject_id').references('id').inTable('subjects').notNull()
         table.integer('class_id').references('id').inTable('classes').notNull()
