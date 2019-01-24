@@ -9,7 +9,7 @@ module.exports = app => {
             existsOrError(subject.name, 'Nome do assunto não informado.')
 
             const subjectFromDB = await app.db('subjects')
-                .where({name: problema.name}).first()
+                .where({name: subject.name}).first()
                 if(!subject.id) {
                     notExistsOrError(subjectFromDB, 'Assunto já cadastrado.')
                 }
@@ -27,7 +27,7 @@ module.exports = app => {
             app.db('subjects')
                 .insert(subject)
                 .then(_ => res.status(204).send())
-                .catch(err => res.status(500).send())
+                .catch(err => res.status(500).send(err))
         }
     }
 

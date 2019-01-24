@@ -4,6 +4,7 @@ module.exports = app => {
 
     //ROTAS QUE NÃO NECESSITAM DE AUTENTICAÇÃO
     app.post('/signin', app.api.auth.signin)
+    app.post('/signup', app.api.user.save)
     app.post('/validateToken', app.api.auth.validateToken)
 
     /* A PARTIR DAQUI TODAS AS ROTAS NECESSITAM DE AUTENTICAÇÃO, 
@@ -53,6 +54,17 @@ module.exports = app => {
         .get(app.api.problem.getById)
         .delete(admin(app.api.problem.remove))
 
+    app.route('/status')
+        .all(app.config.passport.authenticate())
+        .post(admin(app.api.status.save))
+        .get(app.api.status.get)
+
+    app.route('/status/:id')
+        .all(app.config.passport.authenticate())
+        .put(admin(app.api.status.save))
+        .get(app.api.status.getById)
+        .delete(admin(app.api.status.remove))
+
     app.route('/subjects')
         .all(app.config.passport.authenticate())
         .post(admin(app.api.subject.save))
@@ -85,6 +97,7 @@ module.exports = app => {
         .put(admin(app.api.item.save))
         .get(app.api.item.getById)
         .delete(admin(app.api.item.remove))
+
     
     app.route('/users')
         .all(app.config.passport.authenticate())

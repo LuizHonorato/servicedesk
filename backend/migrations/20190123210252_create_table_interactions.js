@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
         table.timestamp('date').notNull()
         table.integer('ticket_id').references('id')
             .inTable('tickets').notNull()
-        table.integer('user_operator').references('id')
+        table.integer('operator_user_id').references('id')
             .inTable('users').notNull()
     })
 };
