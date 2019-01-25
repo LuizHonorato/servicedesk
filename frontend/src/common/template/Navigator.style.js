@@ -7,6 +7,9 @@ const activeColor = '#4fc3f7';
 const dividerColor = '#404854';
 
 export default withStyles(theme => ({
+  link: {
+    textDecoration: 'none !important'
+  },
   drawer: {
     background: '#19212b',
     '& *': {

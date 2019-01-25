@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import {Link} from 'react-router'
 
 // COMPONENTS
 import Drawer from '@material-ui/core/Drawer';
@@ -74,14 +75,16 @@ const Navigator = ({ classes }) => (
                   Service Desk
         </Typography>
       </ListItem>
-      <ListItem className={cx(classes.header, classes.unPaddedRight, classes.activeItem)}>
-        <ListItemIcon className={classes.itemIcon}>
-          <Home />
-        </ListItemIcon>
-        <ListItemText classes={{ primary: classes.itemText }}>
-          Página Inicial
-        </ListItemText>
-      </ListItem>
+      <Link to="/dashboard" className={classes.link}>
+        <ListItem className={cx(classes.header, classes.unPaddedRight, classes.activeItem)}>
+          <ListItemIcon className={classes.itemIcon}>
+            <Home />
+          </ListItemIcon>
+          <ListItemText classes={{ primary: classes.itemText }}>
+            Página Inicial
+          </ListItemText>
+        </ListItem>
+      </Link>
       {categories.map(({ id, children }) => (
         <React.Fragment key={id}>
           <ListItem className={classes.categoryHeader}>
@@ -93,23 +96,24 @@ const Navigator = ({ classes }) => (
               {id}
             </ListItemText>
           </ListItem>
-          {children.map(({ id: childId, icon, active }) => (
-            <ListItem
-              button
-              dense
-              key={childId}
-              className={cx(classes.item, active && classes.activeItem)}
-            >
-              <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
-              <ListItemText
-                classes={{
-                  primary: classes.itemText,
-                  textDense: classes.textDense,
-                }}
+          {children.map(({ id: childId, icon, active, path }) => (
+            <Link to={path} key={childId} className={classes.link}>
+              <ListItem
+                button
+                dense
+                className={cx(classes.item, active && classes.activeItem)}
               >
-                {childId}
-              </ListItemText>
-            </ListItem>
+                <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
+                <ListItemText
+                  classes={{
+                    primary: classes.itemText,
+                    textDense: classes.textDense,
+                  }}
+                >
+                  {childId}
+                </ListItemText>
+              </ListItem>
+            </Link>
           ))}
           <Divider className={classes.divider} />
         </React.Fragment>

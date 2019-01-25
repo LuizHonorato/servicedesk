@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styled, { cx } from 'react-emotion';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -25,12 +24,6 @@ const App = styled(({ className }) => (
     display: 'flex',
     minHeight: '100vh',
   },
-  '.firebase-logo': {
-    maxHeight: 28,
-  },
-  '.firebase-label': {
-    height: 18,
-  },
   '.navigator': {
     position: 'relative',
   },
@@ -40,13 +33,6 @@ const App = styled(({ className }) => (
     flexDirection: 'column',
     main: {
       flex: 1,
-    },
-    '.primary-app-bar': {
-      zIndex: 1150,
-    },
-    '.secondary-app-bar': {
-      top: 0,
-      zIndex: 1140,
     },
     '.main-content': {
       paddingTop: 48,

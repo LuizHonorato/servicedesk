@@ -23,6 +23,10 @@ const styles = () => ({
   grow: {
     flexGrow: 1,
   },
+  secondaryAppBar: {
+    top: 0,
+    zIndex: 1140
+  }
 });
 
 const theme = createMuiTheme({
@@ -48,7 +52,7 @@ class Header extends Component {
       <React.Fragment>
           <MuiThemeProvider theme={theme}>
             <AppBar
-                className={'secondary-app-bar'}
+                className={classes.secondaryAppBar}
                 color={'primary'}
                 position={'sticky'}
                 elevation={0}>
