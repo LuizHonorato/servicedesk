@@ -15,10 +15,17 @@ import Typography from '@material-ui/core/Typography';
 import Queue from '@material-ui/icons/Queue'
 import LibraryBooks from '@material-ui/icons/LibraryBooks'
 import Email from '@material-ui/icons/Email'
+import LiveHelp from '@material-ui/icons/LiveHelp'
 import Home from '@material-ui/icons/Home';
 import People from '@material-ui/icons/People';
+import Person from '@material-ui/icons/Person';
 import Public from '@material-ui/icons/Public';
-
+import Notification from '@material-ui/icons/NotificationImportant'
+import Report from '@material-ui/icons/BarChart'
+import Widgets from '@material-ui/icons/Widgets' 
+import Send from '@material-ui/icons/Send'
+import GroupWork from '@material-ui/icons/GroupWork'
+ 
 
 // STYLES
 import withNavigatorStyles from './Navigator.style';
@@ -29,16 +36,28 @@ const categories = [
     children: [
       { id: 'Novo', icon: <Queue /> },
       { id: 'Meus chamados', icon: <LibraryBooks /> },
-      { id: 'Minha conta', icon: <People />, active: true }
+      { id: 'Não atendidos', icon: <Notification /> },
+      { id: 'Relatórios', icon: <Report /> }
     ],
+  },
+  {
+    id: 'Configurações',
+    children: [
+      { id: 'Minha conta', icon: <Person /> },
+      { id: 'Atributos', icon: <Widgets /> },
+      { id: 'Usuários', icon: <People /> },
+      { id: 'Opções de e-mail', icon: <Email /> },
+      { id: 'Mensagens automáticas', icon: <Send /> },
+      { id: 'Cooperativas', icon: <GroupWork /> }
+    ]
   },
   {
     id: 'Ajuda',
     children: [
       { id: 'Localização', icon: <Public /> },
-      { id: 'Contato', icon: <Email /> }
+      { id: 'Perguntas Frequentes', icon: <LiveHelp /> }
     ],
-  },
+  }
 ];
 
 const Navigator = ({ classes }) => (
@@ -55,7 +74,7 @@ const Navigator = ({ classes }) => (
                   Service Desk
         </Typography>
       </ListItem>
-      <ListItem className={cx(classes.header, classes.unPaddedRight)}>
+      <ListItem className={cx(classes.header, classes.unPaddedRight, classes.activeItem)}>
         <ListItemIcon className={classes.itemIcon}>
           <Home />
         </ListItemIcon>

@@ -4,6 +4,13 @@ exports.up = function(knex, Promise) {
         table.increments('id').primary()
         table.string('coop_number').notNull().unique()
         table.string('name').notNull()
+    }).then(function () {
+        return knex('cooperatives').insert([
+            {
+                coop_number: '1006',
+                name: 'Sicoob São Paulo'
+            }
+        ])
     })
 };
 
